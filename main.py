@@ -11,11 +11,17 @@ import sys
 
 pygame.init()
 # frame set up
-game_display = pygame.display.set_mode((600, 600))
+display_height = 600
+display_width = 600 
+game_display = pygame.display.set_mode((display_height, display_height))
 # game title displayed
 pygame.display.set_caption('/MacGyver/ ESCAPE THE MAZE')
+
 # internal clock might be used for events
 clock = pygame.time.Clock()
+
+# load macgyver image
+macgyver_image = pygame.image.load('macgyver.png' )
 
 # game main loop  - game stay open or endgame if player quit
 endgame = False
