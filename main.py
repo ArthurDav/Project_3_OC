@@ -1,36 +1,55 @@
-#!/usr/bin/python3
+# /python3
 # -*- coding: Utf-8 -*
-
-""" Game Macgyver, main file """
-""" game files/scripts : macgyver.py, constant.py, classes.py  """
 
 import  pygame
 from pygame.locals import *
 import os
 import sys
+import random
 
+
+
+""" Game Macgyver, main file game files/scripts : macgyver.py, constant.py, classes.py  """
+
+# define colors needed in the game
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+DARKGRAY = (40, 40, 40)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+YELLOW = (255, 255, 0)
+
+# define settings
+WIDTH = 1024 # or 32 * 32
+HEIGHT = 768  # or 32 * 24
+FPS = 30
+TITLE = "Macgyver escape the maze!"
+BG_COLOR = DARKGRAY
+
+TILESIZE = 32
+GRID_WIDTH = WIDTH / TILESIZE
+GRID_HEIGHT = HEIGHT / TILESIZE
+
+#initialize pygame and set up
 pygame.init()
-# frame set up
-display_height = 600
-display_width = 600 
-game_display = pygame.display.set_mode((display_height, display_height))
-# game title displayed
-pygame.display.set_caption('/MacGyver/ ESCAPE THE MAZE')
+CLOCK = pygame.time.Clock()
+SCREEN = pygame.display.set_mode(((WIDTH, HEIGHT)))
+pygame.display.set_caption(' MacGyver ESCAPE THE MAZE ')
 
-# internal clock might be used for events
-clock = pygame.time.Clock()
+ALL_SPRITES = pygame.sprite.Group()
 
-# load macgyver image
-macgyver_image = pygame.image.load('macgyver.png' )
+
+
+
 
 # game main loop  - game stay open or endgame if player quit
-endgame = False
-while not endgame :
+RUNNING = True
+while RUNNING:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            endgame = True
-        print(event)
+            RUNNING = False
+        
 
     pygame.display.update()
 
-pygame.quit()
+    pygame.quit()
