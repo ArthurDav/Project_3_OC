@@ -1,55 +1,56 @@
-# /python3
-# -*- coding: Utf-8 -*
-
-import  pygame
-from pygame.locals import *
-import os
-import sys
+import pygame
 import random
 
+WIDTH = 1200
+HEIGHT = 600
+FPS = 30
 
-
-""" Game Macgyver, main file game files/scripts : macgyver.py, constant.py, classes.py  """
-
-# define colors needed in the game
+# define all colors needed
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-DARKGRAY = (40, 40, 40)
-GREEN = (0, 255, 0)
 RED = (255, 0, 0)
-YELLOW = (255, 255, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
 
-# define settings
-WIDTH = 1024 # or 32 * 32
-HEIGHT = 768  # or 32 * 24
-FPS = 30
-TITLE = "Macgyver escape the maze!"
-BG_COLOR = DARKGRAY
+class Player(pygame.sprite.Sprite):
+    #sprite for the Player BTW now the player is only a green square on purpose 
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.Surface((50, 50))
+        self.image.fill(BLUE)
+        self.rect = self.image.get_rect()
+        self.rect.center = (WIDTH / 2, HEIGHT / 2)
 
-TILESIZE = 32
-GRID_WIDTH = WIDTH / TILESIZE
-GRID_HEIGHT = HEIGHT / TILESIZE
 
-#initialize pygame and set up
+# initialize pygame and create a window 
 pygame.init()
-CLOCK = pygame.time.Clock()
-SCREEN = pygame.display.set_mode(((WIDTH, HEIGHT)))
-pygame.display.set_caption(' MacGyver ESCAPE THE MAZE ')
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Macgyver escape the maze")
+clock = pygame.time.Clock()
 
-ALL_SPRITES = pygame.sprite.Group()
+# group all the sprites using .Group
+all_sprites = pygame.sprite.Group()
+player = Player()
+all_sprites.add(player)
 
-
-
-
-
-# game main loop  - game stay open or endgame if player quit
-RUNNING = True
-while RUNNING:
+# Game main loop
+running = True
+while running:
+    # keep loop running at the right speed ( Fram Per Second)
+    clock.tick(FPS)
+    # Process input (events are inputs)
     for event in pygame.event.get():
+        # check for closing window
         if event.type == pygame.QUIT:
-            RUNNING = False
-        
+            running = False
 
-    pygame.display.update()
+    # Update all the sprites
+    all_sprites.update()
 
-    pygame.quit()
+    # Draw & render
+    screen.fill(BLACK)
+    all_sprites.draw(screen)
+    # after drawing everything it gonna flip the display
+    pygame.display.flip()
+
+pygame.quit()
