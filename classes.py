@@ -1,24 +1,40 @@
-import pygame
+import pygame as pg
 from constants import *
-import os
 
-# variable for path 
-game_folder = os.path.dirname(__file__)
-img_folder = os.path.join(game_folder, "img")
-
-
-class Player(pygame.sprite.Sprite):
-    #sprite for the Player 
-    def __init__(self):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load(os.path.join(img_folder, "macgyver.png")).convert()
+class Player(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.image = game.player_img
         self.rect = self.image.get_rect()
-        self.rect.center = (WIDTH / 2, HEIGHT / 2)
+        self.x = x
+        self.y = y
 
-class Guardian(pygame.sprite.Sprite):
-    #sprite for the Guardian 
-    def __init__(self):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load(os.path.join(img_folder, "guardian.png")).convert()
+    def move(self, dx=0, dy=0):
+        if not self.wall_collision(dx, dy): # you can move if not colision with the walls
+            self.x += dx
+            self.y += dy
+
+    def wall_collision(self, dx=0, dy=0):
+        for wall in self.game.walls:
+            if  wall.x == self.x + dx and wall.y == self.y + dy:
+                return True # we did collide
+        return False # we did not collide  
+
+    def update(self):
+        self.rect.x = self.x * TILESIZE
+        self.rect.y = self.y * TILESIZE
+
+class Wall(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites, game.walls
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.image = game .wall_img
         self.rect = self.image.get_rect()
-       
+        self.x = x
+        self.y = y
+        self.rect.x = x * TILESIZE
+        self.rect.y = y * TILESIZE
+
