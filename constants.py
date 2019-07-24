@@ -1,23 +1,45 @@
-# define all colors needed
+# colors & colors settings
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 YELLOW = (255, 255, 0)
 BLUE = (0, 0, 255)
-LIGHTGREY = (100, 100, 100) # I needed a light greyish color to draw the grid and defined the tile properly
-DARKGREY = (40, 40, 40) # then our background
+LIGHTGREY = (194, 194, 194)
+DARKGREY = (40, 40, 40)
+BROWN = (46, 19, 0)
+BEIGE = (138, 122, 103)
+BGCOLOR = BEIGE
+START_BG_COLOR = BLUE
+END_BG_COLOR = RED
 
-WIDTH = 1024 # 32 * 32
-HEIGHT = 768  # 32 * 24
-TILESIZE = 32
+# Screen size / Grid WIDTH HEIGHT
+WIDTH = 930 
+HEIGHT = 930 # 840 / 15 = 56
+TILESIZE = 62
+
 GRIDWIDTH = WIDTH / TILESIZE
 GRIDHEIGHT = HEIGHT / TILESIZE
 
-FPS = 30
-TITLE = "Macgyver espace the maze"
-BGCOLOR = DARKGREY
+# font
+FONT_NAME = 'arial'
 
+# Frame per second
+FPS = 30
+#Game title
+TITLE = "Macgyver espace the maze"
+
+# Graphic content
 PLAYER_IMG = 'macgyver.png'
 WALL_IMG = 'wall.png'
-FLOOR_IMG = 'floor.png'
+WALL2_IMG = 'wall2.jpg'
+GUARDIAN_IMG = 'guardian.png'
+
+# player health if = 0 then game=over py.exit()
+PLAYER_HEALTH = 100
+
+#ITEMS
+AIGUILLE = 'aiguille.png'
+ETHER = 'ether.png'
+SERINGUE = 'seringue.png'
+TUBE_PLASTIQUE = 'tube_plastique.png'
