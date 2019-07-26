@@ -1,5 +1,7 @@
 import pygame as pg
 from constants import *
+import math 
+vec = pg.math.Vector2
 
 class Player(pg.sprite.Sprite):
     def __init__(self, game, x, y):
@@ -8,112 +10,71 @@ class Player(pg.sprite.Sprite):
         self.game = game
         self.image = game.player_img
         self.rect = self.image.get_rect()
-        self.x = x
-        self.y = y
-        self. health = PLAYER_HEALTH
-    
-
-    def move(self, dx=0, dy=0):
-        if not self.wall_collision(dx, dy): # you can move if not colision with the walls
-            self.x += dx
-            self.y += dy
+        self.vel = vec(0, 0)
+        self.pos = vec(x, y) * TILESIZE 
         
 
-    def wall_collision(self, dx=0, dy=0):
-        for wall in self.game.walls:
-            if  wall.x == self.x + dx and wall.y == self.y + dy:
-                return True # we did collide
-        return False # we did not collide
+    def get_keys(self):
+        self.vel = vec(0, 0)
+        keys = pg.key.get_pressed()
+        if keys[pg.K_LEFT] or keys[pg.K_a]:
+            self.vel.x = -PLAYER_SPEED
+        if keys[pg.K_RIGHT] or keys[pg.K_d]:
+            self.vel.x = PLAYER_SPEED
+        if keys[pg.K_UP] or keys[pg.K_w]:
+            self.vel.y = -PLAYER_SPEED
+        if keys[pg.K_DOWN] or keys[pg.K_s]:
+            self.vel.y = PLAYER_SPEED
+        if self.vel.x != 0 and self.vel.y != 0:
+            self.vel *= 0.7071
+            
 
+    def collide_with_walls(self, dir):
+        if dir == 'x':
+            hits = pg.sprite.spritecollide(self, self.game.walls, False)
+            if hits:
+                if self.vel.x > 0:
+                    self.pos.x = hits[0].rect.left - self.rect.width
+                if self.vel.x < 0:
+                    self.pos.x = hits[0].rect.right
+                self.vel.x = 0
+                self.rect.x = self.pos.x
+        if dir == 'y':
+            hits = pg.sprite.spritecollide(self, self.game.walls, False)
+            if hits:
+                if self.vel.y > 0:
+                    self.pos.y = hits[0].rect.top - self.rect.height
+                if self.vel.y < 0:
+                    self.pos.y = hits[0].rect.bottom
+                self.vel.y = 0
+                self.rect.y = self.pos.y
 
     def update(self):
-        self.rect.x = self.x * TILESIZE
-        self.rect.y = self.y * TILESIZE
-
-class Guardian(pg.sprite.Sprite):
-    def __init__(self, game, x, y):
-        self.groups = game.all_sprites, game.guardian
-        pg.sprite.Sprite.__init__(self, self.groups)
-        self.game = game
-        self.image = GUARDIAN_IMG
-        self.image = game .guardian_img
-        self.rect = self.image.get_rect()
-        self.x = x
-        self.y = y
-        self.rect.x = x * TILESIZE
-        self.rect.y = y * TILESIZE
-        
+        self.get_keys()
+        self.pos += self.vel * self.game.dt
+        self.rect.x = self.pos.x
+        self.collide_with_walls('x')
+        self.rect.y = self.pos.y
+        self.collide_with_walls('y')
 
 class Wall(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         self.groups = game.all_sprites, game.walls
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        self.image = game .wall_img
+        self.image = pg.Surface((TILESIZE, TILESIZE))
+        self.image.fill(GREEN)
         self.rect = self.image.get_rect()
         self.x = x
         self.y = y
         self.rect.x = x * TILESIZE
         self.rect.y = y * TILESIZE
 
-class Wall2(pg.sprite.Sprite):
+class Guardian(pg.sprite.Sprite):
     def __init__(self, game, x, y):
-        self.groups = game.all_sprites, game.walls
-        pg.sprite.Sprite.__init__(self,self.groups)
-        self.game = game
-        self.image = WALL2_IMG
-        self.image = game .wall2_img
+        self.groups = game.all_sprites, game.guardian
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.image = game.guardian_img
         self.rect = self.image.get_rect()
-        self.x = x
-        self.y = y
-        self.rect.x = x * TILESIZE
-        self.rect.y = y * TILESIZE
-
-
-class Item(object):
-
-    class Aiguille(pg.sprite.Sprite):
-        def __init__(self, game, x, y):
-            self.groups = game.all_sprites, game.items
-            pg.sprite.Sprite.__init__(self,self.groups)
-            self.game = game
-            self.image = AIGUILLE
-            self.image = game .aiguille_img
-            self.rect = self.image.get_rect()
-            self.x = x
-            self.y = y
-    
-    class tube_plastique(pg.sprite.Sprite):
-        def __init__(self, game, x, y):
-            self.groups = game.all_sprites, game.items
-            pg.sprite.Sprite.__init__(self, self.groups)
-            self.game = game
-            self.image = TUBE_PLASTIQUE
-            self.image = game.tube_plastique_img
-            self.rect = self.image.get_rect()
-            self.x = x 
-            self.y = y
-            
-    class seringue(pg.sprite.Sprites):
-        def __init__(self, game, x, y):
-            self.groups = game.all_sprites, game.items
-            pg.sprite.Sprite.__init__(self, self.groups)
-            self.game = game
-            self.image = SERINGUE
-            self.image = game.seringue_img
-            self.rect = self.image.get_rect()
-            self.x = x 
-            self.y = y
-
-    class ether(pg.sprite.Sprite):
-        def __init__(self, game, x ,y):
-            self.groups = game.all_sprites, game.items
-            pg.sprite.Sprite.__init__(self, self.groups)
-            self.game = game
-            self.image = ETHER
-            self.image = game.ether_img
-            self.rect = self.image.get_rect()
-            self.x = x 
-            self.y = y
-
-        
+        self.pos = vec(x ,y) * TILESIZE
+        self.rect.center = self.pos

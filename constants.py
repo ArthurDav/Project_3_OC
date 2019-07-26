@@ -13,7 +13,7 @@ BGCOLOR = BEIGE
 START_BG_COLOR = BLUE
 END_BG_COLOR = RED
 
-# Screen size / Grid WIDTH HEIGHT
+# Screen size / Grid WIDTH HEIGHT / 15 Tiles
 WIDTH = 930 
 HEIGHT = 930 # 840 / 15 = 56
 TILESIZE = 62
@@ -26,17 +26,23 @@ FONT_NAME = 'arial'
 
 # Frame per second
 FPS = 30
+
 #Game title
 TITLE = "Macgyver espace the maze"
 
-# Graphic content
-PLAYER_IMG = 'macgyver.png'
+# UHD/UX/GH content
 WALL_IMG = 'wall.png'
 WALL2_IMG = 'wall2.jpg'
-GUARDIAN_IMG = 'guardian.png'
 
-# player health if = 0 then game=over py.exit()
+
+# player settings
 PLAYER_HEALTH = 100
+PLAYER_IMG = 'macgyver.png'
+PLAYER_SPEED = 300
+
+#Guardian settings
+GUARDIAN_HEALTH = 100 
+GUARDIAN_IMG = 'guardian.png'
 
 #ITEMS
 AIGUILLE = 'aiguille.png'
