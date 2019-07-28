@@ -79,6 +79,8 @@ class Guardian(pg.sprite.Sprite):
         self.acc = vec(0, 0)
         self.rect.center = self.pos
         self.rot = 0
+        self.repeat_attack = pg.time.get_ticks()
+        self.last_attack = 0
 
     def update(self):
          #self.rot = (self.game.player.pos - self.pos).angle_to(vec(1, 0))
@@ -90,7 +92,9 @@ class Guardian(pg.sprite.Sprite):
         self.hit_rect.centery = self.pos.y
         collide_with_walls(self, self.game.walls, 'y')
         self.rect.center = self.hit_rect.center
-
+        # if pg.time.get_ticks() - self.repeat_attack > GUARDIAN_ATTACK_TIMING: 
+        # we might use that to kill the guardian so we will have to define that after 
+        
 class Wall(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         self.groups = game.all_sprites, game.walls

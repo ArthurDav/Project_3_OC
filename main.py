@@ -5,6 +5,23 @@ from constants import *
 from classes import *
 from tilemap import *
 
+def draw_player_health(surf, x, y, pct):
+    if pct < 0:
+        pct = 0
+    BAR_LENGTH = 100
+    BAR_HEIGHT = 20
+    fill = pct * BAR_LENGTH
+    outline_rect = pg.Rect(x, y, BAR_LENGTH, BAR_HEIGHT)
+    fill_rect = pg.Rect(x, y, fill, BAR_HEIGHT)
+    if pct > 0.6:
+        col = GREEN
+    elif pct > 0.4:
+        col = YELLOW
+    else:
+        col = RED
+    pg.draw.rect(surf, col, fill_rect)
+    pg.draw.rect(surf, WHITE, outline_rect, 2)
+
 class Game:
     def __init__(self):
         pg.init()
@@ -20,6 +37,7 @@ class Game:
         self.player_img = pg.image.load(path.join(img_folder, PLAYER_IMG)).convert_alpha()
         self.player = pg.transform.scale(self.player_img, (10, 10))
         self.guardian_img = pg.image.load(path.join(img_folder, GUARDIAN_IMG)).convert_alpha()
+        self.guardian_img = pg.transform.scale(self.guardian_img, (TILESIZE, TILESIZE))
         self.wall_img = pg.image.load(path.join(img_folder, WALL_IMG)).convert_alpha()
         self.wall_img = pg.transform.scale(self.wall_img, (TILESIZE, TILESIZE))
 
@@ -63,7 +81,6 @@ class Game:
             if  self.player.health <= 0:
                 self.playing = False
         
-
     def draw_grid(self):
         for x in range(0, WIDTH, TILESIZE):
             pg.draw.line(self.screen, LIGHTGREY, (x, 0), (x, HEIGHT))
@@ -77,6 +94,8 @@ class Game:
         for sprite in self.all_sprites:
             self.screen.blit(sprite.image, self.camera.apply(sprite))
         # pg.draw.rect(self.screen, WHITE, self.player.hit_rect, 2)
+        # HEALTH HUD 
+        draw_player_health(self.screen, 10, 10, self.player.health / PLAYER_HEALTH)
         pg.display.flip()
 
     def events(self):
@@ -94,7 +113,7 @@ class Game:
     def show_go_screen(self):
         pass
 
-# create the game object
+# create the game object 
 g = Game()
 g.show_start_screen()
 while True:
