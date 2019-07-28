@@ -5,6 +5,7 @@ from constants import *
 from classes import *
 from tilemap import *
 
+# Draw player health
 def draw_player_health(surf, x, y, pct):
     if pct < 0:
         pct = 0
@@ -23,6 +24,7 @@ def draw_player_health(surf, x, y, pct):
     pg.draw.rect(surf, WHITE, outline_rect, 2)
 
 class Game:
+    """  Main class for the game/loading/ main loop / new_game / run / quit """
     def __init__(self):
         pg.init()
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
@@ -30,6 +32,7 @@ class Game:
         self.clock = pg.time.Clock()
         self.load_data()
 
+    #load main data
     def load_data(self):
         game_folder = path.dirname(__file__)
         img_folder = path.join(game_folder, 'img')
@@ -42,7 +45,7 @@ class Game:
         self.wall_img = pg.transform.scale(self.wall_img, (TILESIZE, TILESIZE))
 
     def new(self):
-        # initialize all variables and do all the setup for a new game
+        # initialize all variables  etc and do all the setup for a new game 
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
         self.guardian = pg.sprite.Group()
@@ -57,7 +60,7 @@ class Game:
         self.camera = Camera(self.map.width, self.map.height)
 
     def run(self):
-        # game loop - set self.playing = False to end the game
+        # game loop - set self.playing = False to end the game / True keep playing
         self.playing = True
         while self.playing:
             self.dt = self.clock.tick(FPS) / 1000.0  # fix for Python 2.x
@@ -70,10 +73,10 @@ class Game:
         sys.exit()
 
     def update(self):
-        # update portion of the game loop
+        # update th whole portion of the game loop
         self.all_sprites.update()
         self.camera.update(self.player)
-        # colilision between 2 group, PLayer & Guardian
+        # colilision between 2 group, PLayer & Guardian or other 
         hits = pg.sprite.spritecollide(self.player, self.guardian, False, collide_hit_rect)
         for hit in hits:
             self.player.health -= GUARDIAN_DAMMAGE
@@ -107,10 +110,10 @@ class Game:
                 if event.key == pg.K_ESCAPE:
                     self.quit()
 
-    def show_start_screen(self):
+    def show_start_screen(self): # will implement later
         pass
 
-    def show_go_screen(self):
+    def show_go_screen(self): # will implement later
         pass
 
 # create the game object 

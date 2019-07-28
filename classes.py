@@ -3,6 +3,7 @@ from constants import *
 from tilemap import collide_hit_rect
 vec = pg.math.Vector2
 
+# collision function
 def collide_with_walls(sprite, group, dir):
     if dir == 'x':
         hits = pg.sprite.spritecollide(sprite, group, False, collide_hit_rect)
@@ -24,6 +25,7 @@ def collide_with_walls(sprite, group, dir):
             sprite.hit_rect.centery = sprite.pos.y
 
 class Player(pg.sprite.Sprite):
+    """  Player class / update player / KEYS_"""
     def __init__(self, game, x, y):
         self.groups = game.all_sprites
         pg.sprite.Sprite.__init__(self, self.groups)
@@ -66,6 +68,7 @@ class Player(pg.sprite.Sprite):
             self.kill()
 
 class Guardian(pg.sprite.Sprite):
+    """  Guardian class / update Guardian"""
     def __init__(self, game, x, y):
         self.groups = game.all_sprites, game.guardian
         pg.sprite.Sprite.__init__(self, self.groups)
@@ -96,6 +99,7 @@ class Guardian(pg.sprite.Sprite):
         # we might use that to kill the guardian so we will have to define that after 
         
 class Wall(pg.sprite.Sprite):
+    """  wall class """
     def __init__(self, game, x, y):
         self.groups = game.all_sprites, game.walls
         pg.sprite.Sprite.__init__(self, self.groups)

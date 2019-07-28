@@ -17,10 +17,12 @@ FPS = 60
 TITLE = "Macgyver Escape the Maze"
 BGCOLOR = BROWN
 
+# Map settings
 TILESIZE = 64
 GRIDWIDTH = WIDTH / TILESIZE
 GRIDHEIGHT = HEIGHT / TILESIZE
 
+# Wall
 WALL_IMG = 'wall.png'
 
 # Player settings
@@ -32,7 +34,7 @@ PLAYER_HEALTH = 10
 BAR_LENGTH = 80 
 BAR_HEIGHT = 20
 
-# Guardian/Mob settings
+# Guardian/Mobs/Objects settings
 GUARDIAN_IMG = 'guardian.png'
 GUARDIAN_HIT_RECT = pg.Rect(0, 0, 30, 30)
 GUARDIAN_DAMMAGE = 0.5
