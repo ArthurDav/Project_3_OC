@@ -1,51 +1,37 @@
-# colors & colors settings
+import pygame as pg
+
+# define some colors (R, G, B)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-YELLOW = (255, 255, 0)
-BLUE = (0, 0, 255)
-LIGHTGREY = (194, 194, 194)
 DARKGREY = (40, 40, 40)
-BROWN = (46, 19, 0)
-BEIGE = (138, 122, 103)
-BGCOLOR = BEIGE
-START_BG_COLOR = BLUE
-END_BG_COLOR = RED
+LIGHTGREY = (100, 100, 100)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+YELLOW = (255, 255, 0)
+BROWN = (106, 55, 5)
 
-# Screen size / Grid WIDTH HEIGHT / 15 Tiles
-WIDTH = 930 
-HEIGHT = 930 # 840 / 15 = 56
-TILESIZE = 62
+# game settings
+WIDTH = 1024   # 16 * 64 or 32 * 32 or 64 * 16
+HEIGHT = 768  # 16 * 48 or 32 * 24 or 64 * 12
+FPS = 60
+TITLE = "Macgyver Escape the Maze"
+BGCOLOR = BROWN
 
+TILESIZE = 64
 GRIDWIDTH = WIDTH / TILESIZE
 GRIDHEIGHT = HEIGHT / TILESIZE
 
-# font
-FONT_NAME = 'arial'
-
-# Frame per second
-FPS = 30
-
-#Game title
-TITLE = "Macgyver espace the maze"
-
-# UHD/UX/GH content
 WALL_IMG = 'wall.png'
-WALL2_IMG = 'wall2.jpg'
 
-
-# player settings
-PLAYER_HEALTH = 100
-PLAYER_IMG = 'macgyver.png'
+# Player settings
 PLAYER_SPEED = 300
+PLAYER_ROT_SPEED = 250
+PLAYER_IMG = 'macgyver.png'
+PLAYER_HIT_RECT = pg.Rect(0, 0, 35, 35)
+PLAYER_HEALTH = 200
 
-#Guardian settings
-GUARDIAN_HEALTH = 100 
+# Mob settings
 GUARDIAN_IMG = 'guardian.png'
+GUARDIAN_HIT_RECT = pg.Rect(0, 0, 30, 30)
+GUARDIAN_DAMMAGE = 90
 
-#ITEMS
-AIGUILLE = 'aiguille.png'
-ETHER = 'ether.png'
-SERINGUE = 'seringue.png'
-TUBE_PLASTIQUE = 'tube_plastique.png'
