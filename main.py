@@ -9,8 +9,6 @@ from tilemap import *
 def draw_player_health(surf, x, y, pct):
     if pct < 0:
         pct = 0
-    BAR_LENGTH = 100
-    BAR_HEIGHT = 20
     fill = pct * BAR_LENGTH
     outline_rect = pg.Rect(x, y, BAR_LENGTH, BAR_HEIGHT)
     fill_rect = pg.Rect(x, y, fill, BAR_HEIGHT)
@@ -36,33 +34,39 @@ class Game:
     def load_data(self):
         game_folder = path.dirname(__file__)
         img_folder = path.join(game_folder, 'img')
-        self.map = Map(path.join(game_folder, 'map.txt'))
+        map_folder = path.join(game_folder, 'maps')
+        self.map = TiledMap(path.join(map_folder, 'map.tmx'))
+        self.map_img = self.map.make_map()
+        self.map_rect = self.map_img.get_rect()
         self.player_img = pg.image.load(path.join(img_folder, PLAYER_IMG)).convert_alpha()
-        self.player = pg.transform.scale(self.player_img, (10, 10))
+        self.player_img = pg.transform.scale(self.player_img, (TILESIZE, TILESIZE))
         self.guardian_img = pg.image.load(path.join(img_folder, GUARDIAN_IMG)).convert_alpha()
-        self.guardian_img = pg.transform.scale(self.guardian_img, (TILESIZE, TILESIZE))
         self.wall_img = pg.image.load(path.join(img_folder, WALL_IMG)).convert_alpha()
         self.wall_img = pg.transform.scale(self.wall_img, (TILESIZE, TILESIZE))
 
     def new(self):
-        # initialize all variables  etc and do all the setup for a new game 
+        # initialize all variables  etc and do all the setup for a new game
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
         self.guardian = pg.sprite.Group()
-        for row, tiles in enumerate(self.map.data):
-            for col, tile in enumerate(tiles):
-                if tile == '1':
-                    Wall(self, col, row)
-                if tile == 'G':
-                    Guardian(self, col, row)
-                if tile == 'P':
-                    self.player = Player(self, col, row)
+        for tile_object in self.map.tmxdata.objects:
+            if tile_object.name == 'player':
+                self.player = Player(self, tile_object.x, tile_object.y)
+            if tile_object.name == 'guardian':
+                Guardian(self, tile_object.x, tile_object.y)
+            if tile_object.name == 'wall':
+                Obstacle(self, tile_object.x, tile_object.y,
+                         tile_object.width, tile_object.height)
+            
+                #self.player = Player(self, 2, 3) spwan object using coordinates
         self.camera = Camera(self.map.width, self.map.height)
+
 
     def run(self):
         # game loop - set self.playing = False to end the game / True keep playing
         self.playing = True
         while self.playing:
+            # Explain  DT !!!
             self.dt = self.clock.tick(FPS) / 1000.0  # fix for Python 2.x
             self.events()
             self.update()
@@ -80,25 +84,27 @@ class Game:
         hits = pg.sprite.spritecollide(self.player, self.guardian, False, collide_hit_rect)
         for hit in hits:
             self.player.health -= GUARDIAN_DAMMAGE
-            hit.vel = vec(10, 10)
-            if  self.player.health <= 0:
+            hit.vel = vec(0, 0)
+            if self.player.health <= 0:
                 self.playing = False
         
-    def draw_grid(self):
+    """def draw_grid(self):
         for x in range(0, WIDTH, TILESIZE):
             pg.draw.line(self.screen, LIGHTGREY, (x, 0), (x, HEIGHT))
         for y in range(0, HEIGHT, TILESIZE):
-            pg.draw.line(self.screen, LIGHTGREY, (0, y), (WIDTH, y))
+            pg.draw.line(self.screen, LIGHTGREY, (0, y), (WIDTH, y))"""
 
     def draw(self):
-        pg.display.set_caption("{:.2f}".format(self.clock.get_fps()))
-        self.screen.fill(BGCOLOR)
-        self.draw_grid()
+        pg.display.set_caption("{:.2f}".format(self.clock.get_fps())) # fps 
+        #self.screen.fill(BGCOLOR)
+        self.screen.blit(self.map_img, self.camera.apply_rect(self.map_rect))
+        #self.draw_grid()
         for sprite in self.all_sprites:
             self.screen.blit(sprite.image, self.camera.apply(sprite))
         # pg.draw.rect(self.screen, WHITE, self.player.hit_rect, 2)
         # HEALTH HUD 
-        draw_player_health(self.screen, 10, 10, self.player.health / PLAYER_HEALTH)
+
+        draw_player_health(self.screen, 25, 30, self.player.health / PLAYER_HEALTH)       
         pg.display.flip()
 
     def events(self):
@@ -116,7 +122,7 @@ class Game:
     def show_go_screen(self): # will implement later
         pass
 
-# create the game object 
+# create the game object
 g = Game()
 g.show_start_screen()
 while True:

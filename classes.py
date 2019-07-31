@@ -35,7 +35,7 @@ class Player(pg.sprite.Sprite):
         self.hit_rect = PLAYER_HIT_RECT
         self.hit_rect.center = self.rect.center
         self.vel = vec(0, 0)
-        self.pos = vec(x, y) * TILESIZE
+        self.pos = vec(x, y)
         self.rot = 0
         self.health = PLAYER_HEALTH
 
@@ -77,13 +77,11 @@ class Guardian(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.hit_rect = GUARDIAN_HIT_RECT.copy()
         self.hit_rect.center = self.rect.center
-        self.pos = vec(x, y) * TILESIZE
+        self.pos = vec(x, y)
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
         self.rect.center = self.pos
-        self.rot = 0
-        self.repeat_attack = pg.time.get_ticks()
-        self.last_attack = 0
+        self.health = GUARDIAN_HEALTH
 
     def update(self):
          #self.rot = (self.game.player.pos - self.pos).angle_to(vec(1, 0))
@@ -99,7 +97,6 @@ class Guardian(pg.sprite.Sprite):
         # we might use that to kill the guardian so we will have to define that after 
         
 class Wall(pg.sprite.Sprite):
-    """  wall class """
     def __init__(self, game, x, y):
         self.groups = game.all_sprites, game.walls
         pg.sprite.Sprite.__init__(self, self.groups)
@@ -110,3 +107,15 @@ class Wall(pg.sprite.Sprite):
         self.y = y
         self.rect.x = x * TILESIZE
         self.rect.y = y * TILESIZE
+
+class Obstacle(pg.sprite.Sprite):
+    def __init__(self, game, x, y, w, h):
+        self.groups = game.walls
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.rect = pg.Rect(x, y, w, h)
+        self.hit_rect = self.rect
+        self.x = x
+        self.y = y
+        self.rect.x = x
+        self.rect.y = y 
