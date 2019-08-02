@@ -71,7 +71,7 @@ class Player(pg.sprite.Sprite):
     def add_point(self, amount):
         self.point += amount
         if self.point > MAX_PLAYER_POINT:
-            self.point = MAX_PLAYER_POINT 
+            self.point = MAX_PLAYER_POINT
              
             
 

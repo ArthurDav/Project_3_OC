@@ -35,10 +35,7 @@ class Game:
     def load_data(self):
         game_folder = path.dirname(__file__)
         img_folder = path.join(game_folder, 'img')
-        map_folder = path.join(game_folder, 'maps')
-        self.map = TiledMap(path.join(map_folder, 'map.tmx'))
-        self.map_img = self.map.make_map()
-        self.map_rect = self.map_img.get_rect()
+        self.map_folder = path.join(game_folder, 'maps')
         self.player_img = pg.image.load(path.join(img_folder, PLAYER_IMG)).convert_alpha()
         self.player_img = pg.transform.scale(self.player_img, (TILESIZE, TILESIZE))
         self.guardian_img = pg.image.load(path.join(img_folder, GUARDIAN_IMG)).convert_alpha()
@@ -55,6 +52,10 @@ class Game:
         self.walls = pg.sprite.Group()
         self.guardian = pg.sprite.Group()
         self.items = pg.sprite.Group()
+        self.map = TiledMap(path.join(self.map_folder, 'map.tmx'))
+        self.map_img = self.map.make_map()
+        self.map_rect = self.map_img.get_rect()
+        self.camera = Camera(self.map.width, self.map.height)
         for tile_object in self.map.tmxdata.objects:
             obj_center = vec(tile_object.x + tile_object.width / 2,
                              tile_object.y + tile_object.height / 2)
@@ -67,10 +68,7 @@ class Game:
                          tile_object.width, tile_object.height)
             if tile_object.name in ['item1', 'item2', 'item3']:
                 Item(self, obj_center, tile_object.name)
-
-                #self.player = Player(self, 2, 3) spwan object using coordinates
-        self.camera = Camera(self.map.width, self.map.height)
-
+# self.player = Player(self, 2, 3) spwan object using coordinates
 
     def run(self):
         # game loop - set self.playing = False to end the game / True keep playing
@@ -95,9 +93,11 @@ class Game:
         for hit in hits:
             self.player.health -= GUARDIAN_DAMMAGE
             if self.player.health <= 0:
-                    self.playing = False 
+                g.show_go_screen()
+                self.playing = False 
             if self.player.point == MAX_PLAYER_POINT:
                 hit.kill()
+                g.quit()
                 
         # player hit items
         hits = pg.sprite.spritecollide(self.player, self.items, False, collide_hit_rect)
@@ -112,7 +112,6 @@ class Game:
                 self.player.add_point(ITEM2_POINT_AMOUNT)
                 hit.kill()
 
-    
     """def draw_grid(self):
         for x in range(0, WIDTH, TILESIZE):
             pg.draw.line(self.screen, LIGHTGREY, (x, 0), (x, HEIGHT))
@@ -127,6 +126,7 @@ class Game:
         for sprite in self.all_sprites:
             self.screen.blit(sprite.image, self.camera.apply(sprite))
         # pg.draw.rect(self.screen, WHITE, self.player.hit_rect, 2)
+
         # HEALTH HUD 
         draw_player_health(self.screen, 25, 30, self.player.health / PLAYER_HEALTH)       
         pg.display.flip()
@@ -141,10 +141,17 @@ class Game:
                     self.quit()
 
     def show_start_screen(self): # will implement later
-        self.screen.fill(YELLOW)
+        self.screen.fill(RED)
         self.draw_text(TITLE, 48, WHITE, WIDTH / 2, HEIGHT / 4)
-        self.draw_text("Macgyver Escaping the MAZE", 22, WHITE, WIDTH / 2, HEIGHT / 2)
-        self.draw_text("Press a key to play", 22, RED, WIDTH / 2, HEIGHT * 3 / 4)
+        self.draw_text("Macgyver Escaping the MAZE ", 22, WHITE, WIDTH / 2, HEIGHT / 2)
+        self.draw_text("Press a key to play ", 22, GREEN, WIDTH / 2, HEIGHT * 3 / 4)
+        pg.display.flip()
+        self.wait_for_key()
+
+    def show_go_screen(self):
+        self.screen.fill(BLACK)
+        self.draw_text('GAMEOVER', 48, RED, WIDTH / 2, HEIGHT / 4)
+        self.draw_text("Press a key 2 times to play again ", 22, RED, WIDTH / 2, HEIGHT * 3 / 4)
         pg.display.flip()
         self.wait_for_key()
 
@@ -159,9 +166,6 @@ class Game:
                     self.quit()
                 if event.type == pg.KEYUP:
                     waiting = False
-
-    def show_go_screen(self):
-        pass
 
     def draw_text(self, text, size, color, x, y):
         font = pg.font.Font(self.font_name, size)
