@@ -14,8 +14,9 @@ BROWN = (106, 55, 5)
 WIDTH = 960   # 
 HEIGHT = 960  #
 FPS = 60
-TITLE = "Macgyver Escape the Maze"
+TITLE = "Macgyver Escaping the Maze"
 BGCOLOR = BROWN
+FONT_NAME = 'arial'
 
 # Map settings
 TILESIZE = 80
@@ -30,14 +31,24 @@ PLAYER_SPEED = 300
 PLAYER_ROT_SPEED = 250
 PLAYER_IMG = 'macgyver.png'
 PLAYER_HIT_RECT = pg.Rect(0, 0, 35, 35)
-PLAYER_HEALTH = 10
+PLAYER_HEALTH = 1000
+PLAYER_POINT = 0
+MAX_PLAYER_POINT = 30
 BAR_LENGTH = 100 
 BAR_HEIGHT = 20
 
 # Guardian/Mobs/Objects settings
 GUARDIAN_IMG = 'guardian.png'
 GUARDIAN_HIT_RECT = pg.Rect(0, 0, 3, 3)
-GUARDIAN_DAMMAGE = 0.5
+GUARDIAN_DAMMAGE = 10
 GUARDIAN_ATTACK_TIMING = 300
 GUARDIAN_HEALTH = 100
+
+# Items
+ITEMS_IMAGE = {'item1': 'item1.png', 'item2': 'item2.png','item3': 'item3.png' }
+HEALTH_BOOST  = 100
+FULL_INVENTORY = {}
+ITEM1_POINT_AMOUNT = 10 
+ITEM2_POINT_AMOUNT = 10 
+ITEM3_POINT_AMOUNT = 10 
 
