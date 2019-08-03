@@ -37,6 +37,7 @@ class Player(pg.sprite.Sprite):
         self.vel = vec(0, 0)
         self.pos = vec(x, y)
         self.rot = 0
+        self.rot_speed = 0
         self.health = PLAYER_HEALTH
         self.point = PLAYER_POINT
 
@@ -72,8 +73,6 @@ class Player(pg.sprite.Sprite):
         self.point += amount
         if self.point > MAX_PLAYER_POINT:
             self.point = MAX_PLAYER_POINT
-             
-            
 
 class Guardian(pg.sprite.Sprite):
     """  Guardian class / update Guardian"""
@@ -138,6 +137,3 @@ class Item(pg.sprite.Sprite):
         self.type = type
         self.rect.center = pos
         self.pos = pos
-
-
-

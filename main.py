@@ -21,6 +21,15 @@ def draw_player_health(surf, x, y, pct):
     pg.draw.rect(surf, col, fill_rect)
     pg.draw.rect(surf, WHITE, outline_rect, 2)
 
+font_name = pg.font.match_font('arial')
+
+def draw_score(surf, text, size, x, y):
+    font = pg.font.Font(font_name, size)
+    text_surface = font.render(text, True, WHITE)
+    text_rect = text_surface.get_rect()
+    text_rect.midtop = (x, y)
+    surf.blit(text_surface, text_rect)
+
 class Game:
     """  Main class for the game/loading/ main loop / new_game / run / quit """
     def __init__(self):
@@ -30,6 +39,7 @@ class Game:
         self.clock = pg.time.Clock()
         self.load_data()
         self.font_name = pg.font.match_font(FONT_NAME)
+        
 
     #load main data
     def load_data(self):
@@ -45,9 +55,8 @@ class Game:
         for item in ITEMS_IMAGE:
             self.item_images[item] = pg.image.load(path.join(img_folder, ITEMS_IMAGE[item])).convert_alpha()
 
-
     def new(self):
-        # initialize all variables  etc and do all the setup for a new game
+    # initialize all variables  etc and do all the setup for a new game
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
         self.guardian = pg.sprite.Group()
@@ -56,6 +65,7 @@ class Game:
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()
         self.camera = Camera(self.map.width, self.map.height)
+         
         for tile_object in self.map.tmxdata.objects:
             obj_center = vec(tile_object.x + tile_object.width / 2,
                              tile_object.y + tile_object.height / 2)
@@ -98,7 +108,7 @@ class Game:
             if self.player.point == MAX_PLAYER_POINT:
                 hit.kill()
                 g.quit()
-                
+         
         # player hit items
         hits = pg.sprite.spritecollide(self.player, self.items, False, collide_hit_rect)
         for hit in hits:
@@ -106,12 +116,11 @@ class Game:
                 self.player.add_point(ITEM1_POINT_AMOUNT)
                 hit.kill()
             if hit.type == 'item2' and self.player.point < MAX_PLAYER_POINT:
-                self.player.add_point(ITEM3_POINT_AMOUNT)
-                hit.kill()
-            if hit.type == 'item3' and self.player.point < MAX_PLAYER_POINT:
                 self.player.add_point(ITEM2_POINT_AMOUNT)
                 hit.kill()
-
+            if hit.type == 'item3' and self.player.point < MAX_PLAYER_POINT:
+                self.player.add_point(ITEM3_POINT_AMOUNT)
+                hit.kill()
     """def draw_grid(self):
         for x in range(0, WIDTH, TILESIZE):
             pg.draw.line(self.screen, LIGHTGREY, (x, 0), (x, HEIGHT))
@@ -126,9 +135,10 @@ class Game:
         for sprite in self.all_sprites:
             self.screen.blit(sprite.image, self.camera.apply(sprite))
         # pg.draw.rect(self.screen, WHITE, self.player.hit_rect, 2)
-
+        draw_score(self.screen, str(self.player.point), 30, WIDTH / 2, 20 )
         # HEALTH HUD 
-        draw_player_health(self.screen, 25, 30, self.player.health / PLAYER_HEALTH)       
+        draw_player_health(self.screen, 25, 30, self.player.health / PLAYER_HEALTH)    
+   
         pg.display.flip()
 
     def events(self):
