@@ -40,6 +40,8 @@ class Player(pg.sprite.Sprite):
         self.rot_speed = 0
         self.health = PLAYER_HEALTH
         self.point = PLAYER_POINT
+        self.x = x 
+        self.y = y
 
     def get_keys(self):
         self.rot_speed = 0
@@ -137,3 +139,5 @@ class Item(pg.sprite.Sprite):
         self.type = type
         self.rect.center = pos
         self.pos = pos
+        self.y = y 
+        self.x = x

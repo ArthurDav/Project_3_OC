@@ -4,7 +4,7 @@ from os import path
 from constants import *
 from classes import *
 from tilemap import *
-
+import random
 # Draw player health
 def draw_player_health(surf, x, y, pct):
     if pct < 0:
@@ -65,7 +65,7 @@ class Game:
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()
         self.camera = Camera(self.map.width, self.map.height)
-         
+
         for tile_object in self.map.tmxdata.objects:
             obj_center = vec(tile_object.x + tile_object.width / 2,
                              tile_object.y + tile_object.height / 2)
@@ -76,10 +76,13 @@ class Game:
             if tile_object.name == 'wall':
                 Obstacle(self, tile_object.x, tile_object.y,
                          tile_object.width, tile_object.height)
-            if tile_object.name in ['item1', 'item2', 'item3']:
+            if tile_object.name in ['item2']:
                 Item(self, obj_center, tile_object.name)
-# self.player = Player(self, 2, 3) spwan object using coordinates
-
+            if tile_object.name in ['item3']:
+                Item(self, obj_center, tile_object.name)
+        #self.player = Player(self ,103, 442) #spwan object using coordinates
+        #Guardian(self, 903, 829)
+        # Item(ITEMS_IMAGE['item1'], 657, 973)
     def run(self):
         # game loop - set self.playing = False to end the game / True keep playing
         self.playing = True

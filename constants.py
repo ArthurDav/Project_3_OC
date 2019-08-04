@@ -46,7 +46,7 @@ GUARDIAN_HEALTH = 100
 
 # Items
 ITEMS_IMAGE = {'item1': 'item1.png', 'item2': 'item2.png','item3': 'item3.png' }
-HEALTH_BOOST = 100
+ITEMS_LIST = [*ITEMS_IMAGE]
 ITEM1_POINT_AMOUNT = 1
 ITEM2_POINT_AMOUNT = 1
 ITEM3_POINT_AMOUNT = 1
