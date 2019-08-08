@@ -1,5 +1,9 @@
 import pygame as pg
 
+"""  all constants VAR and data are stored in this file constants.py 
+constants are recognizable in the other file with UPPERCASE letters
+"""
+
 # define some colors (R, G, B)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -10,18 +14,18 @@ RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 BROWN = (106, 55, 5)
 
-# game settings
-WIDTH = 960   #
-HEIGHT = 960  #
-FPS = 60
+# game settings / screen sized
+WIDTH = 960   #  shown on the screen
+HEIGHT = 960  #shown on the screen
+FPS = 60 # Frame Per Second
 TITLE = "Macgyver Escaping the Maze"
 BGCOLOR = BROWN
 FONT_NAME = 'arial'
 
 # Map settings
 TILESIZE = 80
-#GRIDWIDTH = WIDTH / TILESIZE
-#GRIDHEIGHT = HEIGHT / TILESIZE
+"""  the number of tile is 15/15 and their size is 80 px by 80 px """
+""" the number of tile is verifiable in the map.tmx """
 
 # Wall
 WALL_IMG = 'wall.png'
@@ -50,4 +54,3 @@ ITEMS_LIST = [*ITEMS_IMAGE]
 ITEM1_POINT_AMOUNT = 1
 ITEM2_POINT_AMOUNT = 1
 ITEM3_POINT_AMOUNT = 1
- 
