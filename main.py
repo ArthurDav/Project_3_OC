@@ -301,6 +301,12 @@ class Game:
             y3 = [random.randrange(300, 800 , 100)]
             item3_xy = x3 + y3
             
+            # if you want to use a total random positionning
+            #rand1 = [random.randint(100, 1000)]
+            #rand2 = [random.randint(100, 1000)]
+            #rand3 = rand1 + rand2
+            
+
             # from my loop if my tile_object == to my object name
             # then place this object in tile_object.x and y 
             if tile_object.name == 'player':
@@ -453,7 +459,7 @@ class Game:
         text_rect.midtop = (x, y)
         self.screen.blit(text_surface, text_rect)
 
-# create the game object 
+# create the game object
 g = Game()
 g.show_start_screen()
 while True:
