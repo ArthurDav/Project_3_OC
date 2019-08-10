@@ -7,9 +7,7 @@ from classes import *
 from tilemap import *
 
 """
-
 OC project number 3
-
 python 3.7.3
 UTF-8
 Versionning : 1.0 Stable
@@ -17,31 +15,21 @@ Non previous versionning have been made (Master ----> Master only)
 !! all UPPERCASE VARIABLES are located in constants.py !!
 pygame as pg
 Tile Game based
-
 libraries :
 pygame --> doc --> https://www.pygame.org/docs/
 random --> doc --> https://docs.python.org/3/library/random.html
-
 Pygame
 Used modules:
-
 pygame.Sprite
 https://www.pygame.org/docs/ref/sprite.html
-
 pygame.Rect
 https://www.pygame.org/docs/ref/rect.html
-
 pygame.Surface
 https://www.pygame.org/docs/ref/surface.html
-
 pygame.event
 https://www.pygame.org/docs/ref/event.html
-
-
 -----------------------------------------------Overall of the gamefolder-----------------------------------
-
 /img
-
 contain all images graphicals elements of the games as ..:
     guardian.png
     macgyver.png
@@ -49,9 +37,7 @@ contain all images graphicals elements of the games as ..:
     item2.png
     item3.png
     wall.png
-
 /maps
-
 contain graphical elements for the map of the game :
 !USE A TMX MAP EDITOR TOO EDIT THE FILES!
     floortile.tsx
@@ -59,94 +45,70 @@ contain graphical elements for the map of the game :
     map.tmx  ! PRESIZED RAW SAMPLE !
     maps.tmx
     tilewall.tsx
-
 /__pycache__
-
 containing Python 3 bytecode compiled.
 Keeping this help python to launch the program faster
 You can prevent the creation of this file iw you wish using PYTHONDONTWRITEBYTECODE
 You can find more about there -->
 https://docs.python.org/3/using/cmdline.html#envvar-PYTHONDONTWRITEBYTECODE
-
 main.py
     contain main class/func to launch the game
     main loop
     Game setting/propers
-
 classes.py
     all Class/Objects as the player, floor etc
     Collision function
-
 constants.py
     contain all variables and constant data / properties
-
 tilemap.py
     contain the class Map for map data reading, Tile render
     contain the class Camera for the Camera functionnality
-
 -----------------------------------------------Overview of main.py-----------------------------------
-
 def draw_player_health
     Global function that draw the player's health on screen
-
 def draw_score
     Global function that draw player's score at the midtop position of the screen
-
 Class Game
     This is the main class of the game.
     Inside you'll find all functions that run the game in this order
-
     def __init__()
         Initialaze the content and Pygame
-
     def load_data()
         load all neccessary media, pictures, audio, etc
-
     def  new()
         all elements needed for a new game
         load all groups of sprites
         Place all objects on the tile of the map
-
     def run()
         main game loop
         while playing = True then game is running
-
     def quit()
         quit the game / pygame
-
     def update()
         all properties that change the game while running are nested inside this funtion.
         Update all the Sprites         self.all_sprites.update()
         You'll find al collision properties and outcome inside update()
-
     def draw()
         draw elements on the screens as, score, player health, title, game over screen etc
-
     def events()
     Take the input of pygame.events
     Like player press a key, quit the game etc
-
     def show_start_screen()
         defined the start screen when you launch the game.
         Font, color, message, string, game rules etc
-
     def show_go_screen()
         defined the game over screen.
         this screen appear when the player touch the guardian and die
-
     def wait_for key()
         during our show_start_screen and show_go_screen, we ask the player to press a key
         to go on the next stage. This function is the function that wait for the player input to pass the start/go screen
-
     def draw_text()
         define  text parameters as font size, color etc
         Used to draw text on the show_start\go_screen
-
 g = Game()
 defined the game object.
 Since our game parameters are all nested inside the class Game,
 think about the game as a gobale object.
-
 """
 
 # Draw player health
@@ -301,12 +263,6 @@ class Game:
             y3 = [random.randrange(300, 800 , 100)]
             item3_xy = x3 + y3
             
-            # if you want to use a total random positionning
-            #rand1 = [random.randint(100, 1000)]
-            #rand2 = [random.randint(100, 1000)]
-            #rand3 = rand1 + rand2
-            
-
             # from my loop if my tile_object == to my object name
             # then place this object in tile_object.x and y 
             if tile_object.name == 'player':
@@ -459,7 +415,7 @@ class Game:
         text_rect.midtop = (x, y)
         self.screen.blit(text_surface, text_rect)
 
-# create the game object
+# create the game object 
 g = Game()
 g.show_start_screen()
 while True:
