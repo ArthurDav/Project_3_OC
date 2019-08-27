@@ -15,7 +15,7 @@ YELLOW = (255, 255, 0)
 BROWN = (106, 55, 5)
 
 # game settings / screen sized
-WIDTH = 960   #  shown on the screen
+WIDTH = 960   #  shown on the screen 960
 HEIGHT = 960  #shown on the screen
 FPS = 60 # Frame Per Second
 TITLE = "Macgyver Escaping the Maze"

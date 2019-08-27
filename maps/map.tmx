@@ -1,84 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="15" height="15" tilewidth="80" tileheight="80" infinite="0" nextlayerid="7" nextobjectid="60">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="15" height="15" tilewidth="80" tileheight="80" infinite="0" nextlayerid="4" nextobjectid="22">
  <tileset firstgid="1" source="tilewall.tsx"/>
- <tileset firstgid="2" source="floortile.tsx"/>
- <layer id="1" name="floor" width="15" height="15">
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,2,2,2,2,2,2,2,2,2,2,2,2,2,0,
-0,2,2,2,0,2,2,2,2,2,0,2,2,2,0,
-0,0,0,2,0,2,2,0,0,0,0,2,2,2,0,
-0,2,0,2,2,2,2,0,2,2,2,2,2,2,0,
-0,2,0,0,0,2,0,0,0,2,0,2,2,2,0,
-0,2,2,0,2,2,0,2,0,2,2,2,2,2,0,
-0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,
-0,2,2,0,0,0,0,0,0,0,2,2,2,2,0,
-0,0,2,2,0,2,2,2,2,2,2,2,2,2,0,
-0,0,0,2,0,2,2,0,2,0,0,2,2,2,0,
-0,2,2,2,0,0,0,0,2,2,0,2,0,0,0,
-0,2,0,0,0,2,2,2,2,0,0,2,2,2,0,
-0,2,2,2,2,2,2,2,0,2,2,2,2,2,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <objectgroup id="5" name="Obstacles">
-  <object id="8" name="player" x="100" y="184" width="34" height="34"/>
-  <object id="9" name="wall" x="0" y="0" width="1200" height="80"/>
-  <object id="10" name="wall" x="0" y="80" width="80" height="1120"/>
-  <object id="11" name="wall" x="80" y="1120" width="1120" height="80"/>
-  <object id="12" name="wall" x="1120" y="0" width="80" height="1120"/>
-  <object id="13" name="wall" x="320" y="159" width="80" height="161"/>
-  <object id="15" name="wall" x="80" y="240" width="160" height="80"/>
-  <object id="16" name="wall" x="160" y="320" width="80" height="160"/>
-  <object id="17" name="wall" x="240" y="400" width="160" height="80"/>
-  <object id="18" name="wall" x="240" y="480" width="80" height="80"/>
-  <object id="19" x="800" y="160" height="160"/>
-  <object id="20" x="800" y="320"/>
-  <object id="21" name="wall" x="800" y="160" width="80" height="160"/>
-  <object id="22" name="wall" x="560" y="240" width="240" height="80"/>
-  <object id="23" name="wall" x="560" y="320" width="80" height="160"/>
-  <object id="24" name="wall" x="480" y="400" width="80" height="160"/>
-  <object id="25" name="wall" x="640" y="400" width="80" height="160"/>
-  <object id="26" name="wall" x="240" y="640" width="560" height="80"/>
-  <object id="28" name="wall" x="800" y="400" width="159" height="80"/>
-  <object id="31" name="wall" x="80" y="560" width="80" height="80"/>
-  <object id="32" name="wall" x="160" y="720" height="160"/>
-  <object id="33" name="wall" x="160" y="800" width="80" height="80"/>
-  <object id="34" name="wall" x="320" y="720" width="80" height="320"/>
-  <object id="35" name="wall" x="560" y="800" width="80" height="160"/>
-  <object id="36" name="wall" x="400" y="880" width="160" height="80"/>
-  <object id="37" name="wall" x="160" y="960" width="160" height="80"/>
-  <object id="38" name="wall" x="640" y="1040" width="80" height="80"/>
-  <object id="39" name="wall" x="800" y="800" width="80" height="240"/>
-  <object id="40" name="wall" x="720" y="960" width="80" height="80"/>
-  <object id="41" name="wall" x="720" y="800" width="80" height="80"/>
-  <object id="42" name="wall" x="960" y="880" width="160" height="80"/>
-  <object id="45" name="guardian" x="983" y="1021" width="34" height="35"/>
-  <object id="46" name="item1" x="1000" y="121" width="33" height="36"/>
-  <object id="47" name="item3" x="1068" y="807" width="38" height="43"/>
-  <object id="48" name="item2" x="801" y="575" width="39" height="41"/>
-  <object id="55" name="wall" x="880" y="400" width="80" height="320"/>
-  <object id="56" name="wall" x="960" y="160" width="80" height="160"/>
-  <object id="57" name="wall" x="1040" y="160" width="80" height="80"/>
-  <object id="58" name="wall" x="880" y="720" width="80" height="80"/>
- </objectgroup>
- <layer id="2" name="wall" width="15" height="15">
+ <tileset firstgid="2" source="floor.tsx"/>
+ <layer id="1" name="wall" width="15" height="15">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-1,0,0,0,1,0,0,0,0,0,1,0,1,1,1,
-1,1,1,0,1,0,0,1,1,1,1,0,1,0,1,
-1,0,1,0,0,0,0,1,0,0,0,0,0,0,1,
-1,0,1,1,1,0,1,1,1,0,1,1,0,0,1,
-1,0,0,1,0,0,1,0,1,0,0,1,0,0,1,
-1,1,0,0,0,0,0,0,0,0,0,1,0,0,1,
-1,0,0,1,1,1,1,1,1,1,0,1,0,0,1,
-1,1,0,0,1,0,0,0,0,0,0,1,0,0,1,
-1,1,1,0,1,0,0,1,0,1,1,0,0,0,1,
-1,0,0,0,1,1,1,1,0,0,1,0,1,1,1,
-1,0,1,1,1,0,0,0,0,1,1,0,0,0,1,
-1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,
+1,0,0,1,0,0,0,0,0,0,1,0,0,0,1,
+1,0,0,1,0,0,0,0,0,0,1,0,0,0,1,
+1,0,0,1,1,1,1,1,1,1,1,1,1,0,1,
+1,0,0,1,0,0,0,1,0,0,0,1,0,0,1,
+1,0,0,1,0,0,0,1,0,0,0,1,0,0,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
+1,0,1,0,0,0,1,0,0,0,0,0,0,0,1,
+1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 </data>
  </layer>
+ <layer id="2" name="floor" width="15" height="15">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,2,2,2,2,2,2,2,2,2,2,2,2,2,0,
+0,2,2,0,2,2,2,2,2,2,0,2,2,2,0,
+0,2,2,0,2,2,2,2,2,2,0,2,2,2,0,
+0,2,2,0,0,0,0,0,0,0,0,0,0,2,0,
+0,2,2,0,2,2,2,0,2,2,2,0,2,2,0,
+0,2,2,0,2,2,2,0,2,2,2,0,2,2,0,
+0,2,2,2,2,2,2,2,2,2,2,2,2,2,0,
+0,2,0,0,0,0,0,0,0,0,0,0,0,2,0,
+0,2,2,2,2,2,2,2,2,2,2,2,2,2,0,
+0,2,0,0,0,0,0,0,0,0,0,0,0,2,0,
+0,2,2,2,2,2,0,2,2,2,2,2,2,2,0,
+0,2,0,2,2,2,0,2,2,2,2,2,2,2,0,
+0,2,0,2,2,2,2,2,2,2,2,2,2,2,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="3" name="Object Layer 1">
+  <object id="1" name="wall" x="0" y="0" width="1200" height="80"/>
+  <object id="2" name="wall" x="0" y="80" width="80" height="1120"/>
+  <object id="3" name="wall" x="80" y="1120" width="1120" height="80"/>
+  <object id="4" name="wall" x="1120" y="80" width="80" height="1040"/>
+  <object id="5" name="wall" x="240" y="160" width="80" height="400"/>
+  <object id="6" name="wall" x="320" y="320" width="720" height="80"/>
+  <object id="7" name="wall" x="560" y="400" width="80" height="160"/>
+  <object id="8" name="wall" x="800" y="160" width="80" height="160"/>
+  <object id="9" name="wall" x="880" y="400" width="80" height="160"/>
+  <object id="10" name="wall" x="160" y="640" width="880" height="80"/>
+  <object id="11" name="wall" x="160" y="800" width="880" height="80"/>
+  <object id="12" name="wall" x="480" y="880" width="80" height="160"/>
+  <object id="13" name="wall" x="160" y="960" width="80" height="160"/>
+  <object id="14" name="player" x="107" y="96" width="50" height="47"/>
+  <object id="16" name="guardian" x="977" y="983" width="47" height="45"/>
+  <object id="18" name="item1" x="739" y="591" width="26" height="28"/>
+  <object id="20" name="item2" x="423" y="747" width="36" height="34"/>
+  <object id="21" name="item3" x="1057" y="495" width="36" height="45"/>
+ </objectgroup>
 </map>

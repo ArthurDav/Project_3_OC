@@ -1,4 +1,5 @@
 import pygame as pg
+from pygame import surface
 from constants import *
 import pytmx
 

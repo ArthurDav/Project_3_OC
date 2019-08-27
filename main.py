@@ -1,7 +1,8 @@
-import random
-import sys
-from os import path
 import pygame as pg
+import sys
+import random
+import os
+from os import path
 from constants import *
 from classes import *
 from tilemap import *
@@ -149,7 +150,7 @@ get_rect my surface
 place my surface on the midtop of the screen and .blit it 
     """
     font = pg.font.Font(font_name, size)
-    text_surface = font.render(text, True, WHITE) # True for .render
+    text_surface = font.render(text, True, RED) # True for .render
     text_rect = text_surface.get_rect()
     text_rect.midtop = (x, y)
     surf.blit(text_surface, text_rect)
