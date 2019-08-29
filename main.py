@@ -333,7 +333,8 @@ class Game:
                 self.playing = False 
             if self.player.point == MAX_PLAYER_POINT:
                 hit.kill()
-                g.quit()
+                g.show_go_screen()
+                #g.quit() you can quit the game if you want
          
         # we defined another collision between Payer and Items
         # the system is my PLayer sprite hit Item sprite
