@@ -1,9 +1,6 @@
-# Macgyver escaping the Maze
+# Maze game
 
-## Project number 3 of Python with OpenClassrooms
-
-A tile based game game using pygame.  
-Rules of the project :  https://openclassrooms.com/fr/projects/156/assignment
+## Project from bootcamp
 
 
 
